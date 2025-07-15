@@ -1,1 +1,94 @@
-wirint
+//@version=5
+indicator("Dynamic Levels with 3 Base Inputs and Custom Spacing", overlay=true)
+
+// === Input for 3 base levels and spacings ===
+baseLevel1 = input.float(154.550, title="Base Level 1", tooltip="Enter the first base level")
+spacing1   = input.float(0.100, title="Spacing for Base Level 1", tooltip="Define the spacing for the first base level")
+
+baseLevel2 = input.float(153.550, title="Base Level 2", tooltip="Enter the second base level")
+spacing2   = input.float(0.050, title="Spacing for Base Level 2", tooltip="Define the spacing for the second base level")
+
+baseLevel3 = input.float(152.550, title="Base Level 3", tooltip="Enter the third base level")
+spacing3   = input.float(0.200, title="Spacing for Base Level 3", tooltip="Define the spacing for the third base level")
+
+// === Level Calculations ===
+// Base Level 1
+level1_1 = baseLevel1
+level1_2 = baseLevel1 - spacing1
+level1_3 = baseLevel1 - 2 * spacing1
+level1_4 = baseLevel1 + spacing1
+level1_5 = baseLevel1 + 2 * spacing1
+
+// Base Level 2
+level2_1 = baseLevel2
+level2_2 = baseLevel2 - spacing2
+level2_3 = baseLevel2 - 2 * spacing2
+level2_4 = baseLevel2 + spacing2
+level2_5 = baseLevel2 + 2 * spacing2
+
+// Base Level 3
+level3_1 = baseLevel3
+level3_2 = baseLevel3 - spacing3
+level3_3 = baseLevel3 - 2 * spacing3
+level3_4 = baseLevel3 + spacing3
+level3_5 = baseLevel3 + 2 * spacing3
+
+// === Plot Horizontal Lines ===
+// Base Level 1
+plot(level1_1, title="Base Level 1", color=color.white, linewidth=2, style=plot.style_stepline, trackprice=true)
+plot(level1_2, title="Level 1 Below 1", color=color.red, linewidth=1, style=plot.style_stepline, trackprice=true)
+plot(level1_3, title="Level 1 Below 2", color=color.orange, linewidth=1, style=plot.style_stepline, trackprice=true)
+plot(level1_4, title="Level 1 Above 1", color=color.green, linewidth=1, style=plot.style_stepline, trackprice=true)
+plot(level1_5, title="Level 1 Above 2", color=color.blue, linewidth=1, style=plot.style_stepline, trackprice=true)
+
+// Base Level 2
+plot(level2_1, title="Base Level 2", color=color.gray, linewidth=2, style=plot.style_stepline, trackprice=true)
+plot(level2_2, title="Level 2 Below 1", color=color.purple, linewidth=1, style=plot.style_stepline, trackprice=true)
+plot(level2_3, title="Level 2 Below 2", color=color.aqua, linewidth=1, style=plot.style_stepline, trackprice=true)
+plot(level2_4, title="Level 2 Above 1", color=color.yellow, linewidth=1, style=plot.style_stepline, trackprice=true)
+plot(level2_5, title="Level 2 Above 2", color=color.fuchsia, linewidth=1, style=plot.style_stepline, trackprice=true)
+
+// Base Level 3
+plot(level3_1, title="Base Level 3", color=color.teal, linewidth=2, style=plot.style_stepline, trackprice=true)
+plot(level3_2, title="Level 3 Below 1", color=color.maroon, linewidth=1, style=plot.style_stepline, trackprice=true)
+plot(level3_3, title="Level 3 Below 2", color=color.navy, linewidth=1, style=plot.style_stepline, trackprice=true)
+plot(level3_4, title="Level 3 Above 1", color=color.lime, linewidth=1, style=plot.style_stepline, trackprice=true)
+plot(level3_5, title="Level 3 Above 2", color=color.silver, linewidth=1, style=plot.style_stepline, trackprice=true)
+
+// === Detect Crosses ===
+crossUp =
+    (close > level1_1 and low <= level1_1) or
+    (close > level1_2 and low <= level1_2) or
+    (close > level1_3 and low <= level1_3) or
+    (close > level1_4 and low <= level1_4) or
+    (close > level1_5 and low <= level1_5) or
+    (close > level2_1 and low <= level2_1) or
+    (close > level2_2 and low <= level2_2) or
+    (close > level2_3 and low <= level2_3) or
+    (close > level2_4 and low <= level2_4) or
+    (close > level2_5 and low <= level2_5) or
+    (close > level3_1 and low <= level3_1) or
+    (close > level3_2 and low <= level3_2) or
+    (close > level3_3 and low <= level3_3) or
+    (close > level3_4 and low <= level3_4) or
+    (close > level3_5 and low <= level3_5)
+
+crossDown =
+    (close < level1_1 and high >= level1_1) or
+    (close < level1_2 and high >= level1_2) or
+    (close < level1_3 and high >= level1_3) or
+    (close < level1_4 and high >= level1_4) or
+    (close < level1_5 and high >= level1_5) or
+    (close < level2_1 and high >= level2_1) or
+    (close < level2_2 and high >= level2_2) or
+    (close < level2_3 and high >= level2_3) or
+    (close < level2_4 and high >= level2_4) or
+    (close < level2_5 and high >= level2_5) or
+    (close < level3_1 and high >= level3_1) or
+    (close < level3_2 and high >= level3_2) or
+    (close < level3_3 and high >= level3_3) or
+    (close < level3_4 and high >= level3_4) or
+    (close < level3_5 and high >= level3_5)
+
+// === Highlight Candles ===
+barcolor(crossUp ? color.green : crossDown ? color.red : na, title="Candle Highlight")
