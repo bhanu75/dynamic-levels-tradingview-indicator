@@ -1,4 +1,6 @@
- 📊 Dynamic Levels TradingView Indicator
+# Dynamic Levels Indicator 📊
+![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)
+
 
 A customizable Pine Script indicator that dynamically draws horizontal support/resistance levels around three base price points, with individual spacing for each. Designed for price action traders, breakout analysts, and zone-based strategy enthusiasts.
 
@@ -70,10 +72,7 @@ This makes levels highly interactive, not just static lines.
 
 ---
 
- 💻 Code Sample (Extract)
+## 📝 License
 
-```pinescript
-plot(level1_1, title="Base Level 1", color=color.white, linewidth=2, style=plot.style_stepline, trackprice=true)
-barcolor(crossUp ? color.green : crossDown ? color.red : na, title="Candle Highlight")
-
-The full code is in dynamic-levels.pine
+This project is licensed under the [MIT License](LICENSE) – free for personal or commercial use with attribution.  
+Feel free to fork, improve, or integrate it into your own strategies.
