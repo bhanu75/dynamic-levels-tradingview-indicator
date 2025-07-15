@@ -19,7 +19,7 @@ A customizable Pine Script indicator that dynamically draws horizontal support/r
 
  📷 Visual Preview
 
-[Chart Screenshot](Dynamic Levels TradingView Indicator.jpeg)
+[Chart Screenshot](Dynamic Levels TradingView Indicator.jpg)
 
 Above: Levels adapting around 3 major base price points with color-coded candle crosses.
 
